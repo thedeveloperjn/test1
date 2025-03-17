@@ -2,6 +2,7 @@ import { BASE_URL, PROJECT_ID, Image_url } from "@/app/config/constants";
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { fetchAllPosts } from "@/app/utils/api";
+import type { Metadata } from 'next';
 
 // Lazy load components
 const BlogBanner = dynamic(() => import("@/app/components/BlogBanner"), {
