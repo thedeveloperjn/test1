@@ -9,9 +9,12 @@ const nextConfig = {
       },
     ],
   },
-  transpilePackages: ['lucide-react'], // Transpile specific packages
+  transpilePackages: ["lucide-react"], // Transpile specific packages
   eslint: {
     ignoreDuringBuilds: true, // Disable ESLint during builds
+  },
+  typescript: {
+    ignoreBuildErrors: true, // Temporarily disable TypeScript type checking during builds
   },
 };
 

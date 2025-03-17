@@ -1,8 +1,8 @@
 import { BASE_URL, PROJECT_ID, Image_url } from "@/app/config/constants";
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import dynamic from "next/dynamic";
+import Link from "next/link";
 import { fetchAllPosts } from "@/app/utils/api";
-import type { Metadata } from 'next';
+import type { Metadata, NextPage } from "next";
 
 // Lazy load components
 const BlogBanner = dynamic(() => import("@/app/components/BlogBanner"), {
@@ -29,20 +29,13 @@ interface BlogPost {
   };
 }
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
+// Define the params type for the dynamic route [slug]
+type PageParams = {
+  slug: string;
+};
 
-async function fetchBlogData(slug: string): Promise<BlogPost | null> {
-  const response = await fetch(`${BASE_URL}/website/post/get-post-by-slug/${PROJECT_ID}?slug=${slug}`, { next: { revalidate: 3600 } });
-  if (!response.ok) throw new Error("Failed to fetch blog");
-  const result = await response.json();
-  return result.data || null;
-}
-
-export default async function BlogDetail({ params }: PageProps) {
+// Use NextPage to type the component
+const BlogDetail: NextPage<{ params: PageParams }> = async ({ params }) => {
   const [blog, allblogs] = await Promise.all([fetchBlogData(params.slug), fetchAllPosts()]);
 
   if (!blog) {
@@ -64,7 +57,7 @@ export default async function BlogDetail({ params }: PageProps) {
       <h1 className="text-[#ffffff66] font-ibmplexmono !text-[14px] uppercase text-center tracking-[0.05rem] pt-20 pb-1 flex items-center justify-center gap-2">
         <span className="h-2 w-2 rounded-full bg-[#ffffff66] inline-block"></span> Blog
       </h1>
-      <h3 className="text-[35px] md:text-[62px] text-white font-[100] -tracking-[0.01em] text-center pb-8 lg:pb-15 font-movatif leading:[50px] lg:leading-[70px]">
+      <h3 className="text-[35px] md:text-[62px] text-white font-[100] -tracking-[0.01em] text-center pb-8 lg:pb-15 font-movatif leading-[50px] lg:leading-[70px]">
         {blog.title}
       </h3>
       <div className="flex flex-col lg:flex-row gap-[25px]">
@@ -135,4 +128,14 @@ export default async function BlogDetail({ params }: PageProps) {
       </div>
     </div>
   );
+};
+
+// Define fetchBlogData outside the component
+async function fetchBlogData(slug: string): Promise<BlogPost | null> {
+  const response = await fetch(`${BASE_URL}/website/post/get-post-by-slug/${PROJECT_ID}?slug=${slug}`, { next: { revalidate: 3600 } });
+  if (!response.ok) throw new Error("Failed to fetch blog");
+  const result = await response.json();
+  return result.data || null;
 }
+
+export default BlogDetail;
