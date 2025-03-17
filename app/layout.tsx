@@ -1,14 +1,10 @@
-"use client"; // This is necessary for client-side features like useState and QueryClientProvider
-
-import type { Metadata } from "next"; // Metadata cannot be used in Client Components
+// app/layout.tsx (with ScrollToTop in Suspense)
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ClientWrapper from "./components/ClientWrapper";
 import ScrollToTop from "./components/Scrolltotop";
-import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
-import { Import } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +16,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function RootLayout({ children }) {
-  // Create a QueryClient instance once per app lifecycle
-  const [queryClient] = useState(() => new QueryClient());
+export const metadata: Metadata = {
+  title: "ROLBOL",
+  description: "Your description here",
+};
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
@@ -35,14 +33,15 @@ export default function RootLayout({ children }) {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
 
-        {/* Scroll-to-top button */}
-        <ScrollToTop />
+        {/* Wrap ScrollToTop in Suspense if it’s a Client Component */}
+        <Suspense fallback={<div className="h-12" />}>
+          <ScrollToTop />
+        </Suspense>
 
-        <QueryClientProvider client={queryClient}>
-  <NavBar/>
-  {children}
-  <Footer />
-</QueryClientProvider>
+        {/* Wrap client-side components in a separate Client Component */}
+        <ClientWrapper>{children}</ClientWrapper>
+
+        <Footer />
       </body>
     </html>
   );

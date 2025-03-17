@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Suspense } from "react";
 import { fetchAllPosts } from "../../utils/api";
-import NavBar from "../../components/Navbar";
+
 import BlogBanner from "../../components/BlogBanner";
 import ExploreOtherBlogs from "../../components/Exploreotherblogs";
 
@@ -68,9 +68,6 @@ export default async function BlogDetail({
 
   return (
     <div className="min-h-screen bg-black">
-      <Suspense fallback={<div className="h-[80px] bg-black" />}>
-        <NavBar />
-      </Suspense>
       <div className="max-w-[1130px] mx-auto pb-20 mt-[20px] px-4">
         <h1 className="text-[#ffffff66] font-ibmplexmono !text-[14px] uppercase text-center tracking-[0.05rem] pt-20 pb-1 flex items-center justify-center gap-2">
           <span className="h-2 w-2 rounded-full bg-[#ffffff66] inline-block"></span>{" "}
