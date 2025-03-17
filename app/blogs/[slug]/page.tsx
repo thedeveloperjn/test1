@@ -2,13 +2,14 @@ import { BASE_URL, PROJECT_ID, Image_url } from "@/app/config/constants";
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { fetchAllPosts } from "@/app/utils/api";
-// Lazy load components that are not immediately needed
-const BlogBanner = dynamic(() => import("@/app/components/BlogBanner"), { 
-  loading: () => <div className="h-64 bg-gray-700 animate-pulse rounded-lg"></div> 
+
+// Lazy load components
+const BlogBanner = dynamic(() => import("@/app/components/BlogBanner"), {
+  loading: () => <div className="h-64 bg-gray-700 animate-pulse rounded-lg"></div>,
 });
 
-const ExploreOtherBlogs = dynamic(() => import("@/app/components/Exploreotherblogs"), { 
-  loading: () => <div className="h-32 bg-gray-700 animate-pulse rounded-lg"></div> 
+const ExploreOtherBlogs = dynamic(() => import("@/app/components/Exploreotherblogs"), {
+  loading: () => <div className="h-32 bg-gray-700 animate-pulse rounded-lg"></div>,
 });
 
 interface BlogPost {
@@ -27,15 +28,20 @@ interface BlogPost {
   };
 }
 
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
 async function fetchBlogData(slug: string): Promise<BlogPost | null> {
-  const response = await fetch(`${BASE_URL}/website/post/get-post-by-slug/${PROJECT_ID}?slug=${slug}`, { next: { revalidate: 3600 } }); // Revalidate cache every hour
+  const response = await fetch(`${BASE_URL}/website/post/get-post-by-slug/${PROJECT_ID}?slug=${slug}`, { next: { revalidate: 3600 } });
   if (!response.ok) throw new Error("Failed to fetch blog");
   const result = await response.json();
   return result.data || null;
 }
 
-
-export default async function BlogDetail({ params }: { params: { slug: string } }) {
+export default async function BlogDetail({ params }: PageProps) {
   const [blog, allblogs] = await Promise.all([fetchBlogData(params.slug), fetchAllPosts()]);
 
   if (!blog) {
@@ -57,7 +63,7 @@ export default async function BlogDetail({ params }: { params: { slug: string } 
       <h1 className="text-[#ffffff66] font-ibmplexmono !text-[14px] uppercase text-center tracking-[0.05rem] pt-20 pb-1 flex items-center justify-center gap-2">
         <span className="h-2 w-2 rounded-full bg-[#ffffff66] inline-block"></span> Blog
       </h1>
-      <h3 className="text-[35px]  md:text-[62px] text-white font-[100] -tracking-[0.01em] text-center pb-8 lg:pb-15 font-movatif leading:[50px] lg:leading-[70px]">
+      <h3 className="text-[35px] md:text-[62px] text-white font-[100] -tracking-[0.01em] text-center pb-8 lg:pb-15 font-movatif leading:[50px] lg:leading-[70px]">
         {blog.title}
       </h3>
       <div className="flex flex-col lg:flex-row gap-[25px]">
@@ -70,11 +76,11 @@ export default async function BlogDetail({ params }: { params: { slug: string } 
                 <div className="text-[#ffffff99] text-[16px] font-lighter text-justify tracking-[0.6px] font-ibmplexmono" dangerouslySetInnerHTML={{ __html: item.description.replace(/(.*?):/g, "<strong>$1</strong>:").replace(/\n/g, "<br>") }} />
                 {item.singleImage?.image && (
                   <div className="single-image-container mt-4">
-                     <img
-                  src={`${Image_url}${item.singleImage.image}`}
-                  alt="Blog Image"
-                  className="rounded-lg w-full"
-                />
+                    <img
+                      src={`${Image_url}${item.singleImage.image}`}
+                      alt="Blog Image"
+                      className="rounded-lg w-full"
+                    />
                   </div>
                 )}
                 {item.youtube && (
@@ -87,11 +93,11 @@ export default async function BlogDetail({ params }: { params: { slug: string } 
                     {item.multipleImages.map((image, idx) => (
                       <div key={idx} className={`gallery-item overflow-hidden rounded-xl relative group ${item.multipleImages.length === 3 && idx === 0 ? "col-span-2 row-span-2" : item.multipleImages.length > 4 && idx === 0 ? "col-span-2 row-span-2" : ""}`}>
                         <a href={`${Image_url}${image}`} target="_blank" rel="noopener noreferrer">
-                        <img
-                      src={`${Image_url}${image}`}
-                      alt="Blog Gallery"
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 ease-in-out group-hover:scale-105"
-                    />
+                          <img
+                            src={`${Image_url}${image}`}
+                            alt="Blog Gallery"
+                            className="w-full h-full object-cover rounded-xl transition-transform duration-300 ease-in-out group-hover:scale-105"
+                          />
                           <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </a>
                       </div>
