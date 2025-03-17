@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+
+@import "tailwindcss";
+@tailwind base;
+
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Movatif';
+  src: url('/fonts/movatif-regular.otf') format('opentype');
+
+  font-style: normal;
+}
+
+.test-wrapper .swiper-wrapper{
+  padding-left: 30px;
+  gap: 25px;
+}
+
+@media (max-width:768px) {
+  .test-wrapper .swiper-wrapper{
+    padding-left: 0px;
+  }
+}
+
+.lucide-play{
+  fill: #111010 !important;
+}
+
+@font-face {
+  font-family: "TypoGrotesk";
+  src: url("/fonts/TypoGroteskDemo.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #000000;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.font-movatif{
+  font-family: 'Movatif', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.font-grotesk {
+  font-family: 'TypoGrotesk', sans-serif;
+}
+.font-ibmflexmono{
+  font-family: "IBM Plex Mono", monospace;
+}
+
+
+.mini .swiper-wrapper{
+  justify-content: center;
+}
