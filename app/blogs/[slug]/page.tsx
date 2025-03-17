@@ -6,6 +6,8 @@ import Image from "next/image";
 import { Suspense } from "react";
 import { fetchAllPosts } from "../../utils/api";
 import NavBar from "../../components/Navbar";
+import BlogBanner from "../../components/BlogBanner";
+import ExploreOtherBlogs from "../../components/Exploreotherblogs";
 
 interface BlogPost {
   title: string;
@@ -37,10 +39,16 @@ async function fetchBlogData(slug: string): Promise<BlogPost | null> {
   return result.data || null;
 }
 
-// Define the page component with direct typing, avoiding NextPage
-export default async function BlogDetail({ params }: { params: PageParams }) {
+// Use a generic type to satisfy PageProps
+export default async function BlogDetail({
+  params,
+}: {
+  params: Promise<PageParams>;
+}) {
+  const resolvedParams = await params;
+
   const [blog, allblogs] = await Promise.all([
-    fetchBlogData(params.slug),
+    fetchBlogData(resolvedParams.slug),
     fetchAllPosts(),
   ]);
 
@@ -181,7 +189,7 @@ export default async function BlogDetail({ params }: { params: PageParams }) {
               </h3>
               <ExploreOtherBlogs
                 allblogs={allblogs}
-                currentSlug={params.slug}
+                currentSlug={resolvedParams.slug}
               />
             </div>
             <div className="bg-[#1a1a1a] p-5 rounded-lg pb-6">
