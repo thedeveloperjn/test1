@@ -5,7 +5,7 @@ import "./globals.css";
 import ClientWrapper from "./components/ClientWrapper";
 import ScrollToTop from "./components/Scrolltotop";
 import Footer from "./components/Footer";
-
+import { Suspense } from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
