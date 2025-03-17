@@ -87,7 +87,7 @@ export default async function BlogDetail({
               {blog.multipleDescriptions?.map((item, index) => (
                 <div key={index} className="single-description mb-8">
                   <div
-                    className="text-[#ffffff99] text-[16px] font-lighter text-justify tracking-[0.6px] font-ibmplexmono"
+                    className="text-[#ffffff99] text-[14px] md:text-[16px] font-lighter text-justify tracking-[0.6px] font-ibmplexmono"
                     dangerouslySetInnerHTML={{
                       __html: item.description
                         .replace(/(.*?):/g, "<strong>$1</strong>:")
