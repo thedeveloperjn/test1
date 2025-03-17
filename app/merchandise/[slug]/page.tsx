@@ -8,7 +8,7 @@ import { Navigation, Thumbs } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import SwiperBanner from "@/app/components/swiper";
+import SwiperBanner from "../../components/swiper";
 
 
 const ProductPage = () => {

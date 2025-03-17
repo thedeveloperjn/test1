@@ -1,15 +1,15 @@
-import { BASE_URL, PROJECT_ID, Image_url } from "@/app/config/constants";
+import { BASE_URL, PROJECT_ID, Image_url } from "../../config/constants";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { fetchAllPosts } from "@/app/utils/api";
+import { fetchAllPosts } from "../../utils/api";
 import type { Metadata, NextPage } from "next";
 
 // Lazy load components
-const BlogBanner = dynamic(() => import("@/app/components/BlogBanner"), {
+const BlogBanner = dynamic(() => import("../../components/BlogBanner"), {
   loading: () => <div className="h-64 bg-gray-700 animate-pulse rounded-lg"></div>,
 });
 
-const ExploreOtherBlogs = dynamic(() => import("@/app/components/Exploreotherblogs"), {
+const ExploreOtherBlogs = dynamic(() => import("../../components/Exploreotherblogs"), {
   loading: () => <div className="h-32 bg-gray-700 animate-pulse rounded-lg"></div>,
 });
 
