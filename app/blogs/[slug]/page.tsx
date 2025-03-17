@@ -2,20 +2,10 @@
 import { BASE_URL, PROJECT_ID, Image_url } from "../../config/constants";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image from "next/image"; // Import next/image
-import { Suspense } from "react"; // Import Suspense
+import Image from "next/image";
+import { Suspense } from "react";
 import { fetchAllPosts } from "../../utils/api";
-import type { NextPage } from "next";
-import NavBar from "../../components/Navbar"; // Import NavBar
-
-// Lazy load components
-const BlogBanner = dynamic(() => import("../../components/BlogBanner"), {
-  loading: () => <div className="h-64 bg-gray-700 animate-pulse rounded-lg"></div>,
-});
-
-const ExploreOtherBlogs = dynamic(() => import("../../components/Exploreotherblogs"), {
-  loading: () => <div className="h-32 bg-gray-700 animate-pulse rounded-lg"></div>,
-});
+import NavBar from "../../components/Navbar";
 
 interface BlogPost {
   title: string;
@@ -33,7 +23,6 @@ interface BlogPost {
   };
 }
 
-// Define the params type for the dynamic route [slug]
 type PageParams = {
   slug: string;
 };
@@ -48,13 +37,10 @@ async function fetchBlogData(slug: string): Promise<BlogPost | null> {
   return result.data || null;
 }
 
-// Use NextPage with a type assertion to resolve the Promise<any> constraint
-const BlogDetail: NextPage<{ params: PageParams }> = async ({ params }) => {
-  // Type assertion to treat params as the expected object
-  const resolvedParams = params as { slug: string };
-
+// Define the page component with direct typing, avoiding NextPage
+export default async function BlogDetail({ params }: { params: PageParams }) {
   const [blog, allblogs] = await Promise.all([
-    fetchBlogData(resolvedParams.slug),
+    fetchBlogData(params.slug),
     fetchAllPosts(),
   ]);
 
@@ -74,7 +60,6 @@ const BlogDetail: NextPage<{ params: PageParams }> = async ({ params }) => {
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Wrap NavBar in Suspense */}
       <Suspense fallback={<div className="h-[80px] bg-black" />}>
         <NavBar />
       </Suspense>
@@ -220,6 +205,4 @@ const BlogDetail: NextPage<{ params: PageParams }> = async ({ params }) => {
       </div>
     </div>
   );
-};
-
-export default BlogDetail;
+}
