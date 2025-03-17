@@ -94,16 +94,15 @@ export default async function BlogDetail({
                         .replace(/\n/g, "<br>"),
                     }}
                   />
-                  {item.singleImage?.image && (
-                    <div className="single-image-container mt-4 relative w-full h-[300px]">
-                      <Image
-                        src={`${Image_url}${item.singleImage.image}`}
-                        alt="Blog Image"
-                        fill
-                        className="rounded-lg object-cover"
-                      />
-                    </div>
-                  )}
+                 {item.singleImage?.image && (
+                  <div className="single-image-container mt-4">
+                     <img
+                  src={`${Image_url}${item.singleImage.image}`}
+                  alt="Blog Image"
+                  className="rounded-lg w-full"
+                />
+                  </div>
+                )}
                   {item.youtube && (
                     <div className="youtube-container mt-6">
                       <iframe
@@ -149,13 +148,12 @@ export default async function BlogDetail({
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <div className="relative w-full h-[200px]">
-                                <Image
-                                  src={`${Image_url}${image}`}
-                                  alt="Blog Gallery"
-                                  fill
-                                  className="object-cover rounded-xl transition-transform duration-300 ease-in-out group-hover:scale-105"
-                                />
+                              <div className="relative w-full h-full min-h-[200px]">
+                              <img
+                      src={`${Image_url}${image}`}
+                      alt="Blog Gallery"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 ease-in-out group-hover:scale-105"
+                    />
                                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </div>
                             </a>
