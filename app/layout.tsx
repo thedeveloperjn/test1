@@ -1,15 +1,11 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import dynamic from "next/dynamic"; // Import dynamic
 import "./globals.css";
 import ClientWrapper from "./components/ClientWrapper";
 import ScrollToTop from "./components/Scrolltotop";
 import Footer from "./components/Footer";
 import { Suspense } from "react";
-
-// Dynamically load NavBar with SSR disabled
-const NavBar = dynamic(() => import("./components/Navbar"), { ssr: false });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,10 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollToTop />
         </Suspense>
 
-        {/* NavBar is dynamically loaded client-side */}
-        <NavBar />
-
-        {/* ClientWrapper for other client-side logic (without NavBar) */}
+        {/* ClientWrapper will handle NavBar dynamically */}
         <ClientWrapper>{children}</ClientWrapper>
 
         <Footer />
