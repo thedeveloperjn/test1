@@ -1,7 +1,7 @@
 // app/404.tsx
 import { Suspense } from "react";
 import Link from "next/link";
-import NavBar from "../components/Navbar";
+import NavBar from "./components/Navbar";
 
 export default function NotFound() {
   return (

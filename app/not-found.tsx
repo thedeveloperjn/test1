@@ -1,7 +1,7 @@
 // app/_not-found.tsx
 import { Suspense } from "react";
 import Link from "next/link";
-import NavBar from "../components/Navbar"; // Adjust the import path if needed
+import NavBar from "./components/Navbar"; // Adjust the import path if needed
 
 export default function NotFound() {
   return (
