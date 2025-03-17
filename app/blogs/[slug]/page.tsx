@@ -33,6 +33,7 @@ interface BlogPost {
   };
 }
 
+// Define the params type for the dynamic route [slug]
 type PageParams = {
   slug: string;
 };
@@ -47,9 +48,13 @@ async function fetchBlogData(slug: string): Promise<BlogPost | null> {
   return result.data || null;
 }
 
+// Use NextPage with a type assertion to resolve the Promise<any> constraint
 const BlogDetail: NextPage<{ params: PageParams }> = async ({ params }) => {
+  // Type assertion to treat params as the expected object
+  const resolvedParams = params as { slug: string };
+
   const [blog, allblogs] = await Promise.all([
-    fetchBlogData(params.slug),
+    fetchBlogData(resolvedParams.slug),
     fetchAllPosts(),
   ]);
 
