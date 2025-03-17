@@ -1,4 +1,6 @@
+// app/components/Navbar.tsx
 "use client";
+
 import { navdata } from "../data";
 import { Button } from "../components/Button";
 import { useQueryWithLoading } from "../hooks/useGlobalHook";
@@ -40,23 +42,39 @@ import { Key, SetStateAction, useEffect, useState } from "react";
 import { AuthDialog } from "./cards/auth/AuthDialog";
 import { Input } from "../ui/input";
 import { LinkButton } from "../ui/Link";
-
-import { SubNav } from "./topNavigation/sub-nav";
 import { updateCartSummary } from "../store/action/cart";
+
+// Placeholder for SearchProductOne (replace with actual implementation if available)
+function SearchProductOne({ product }: { product: Product }) {
+  return (
+    <Link href={`/product/${product.id}`} className="block p-2 hover:bg-gray-100">
+      <div className="flex items-center gap-2">
+        {product.image && (
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={40}
+            height={40}
+            className="rounded-md"
+          />
+        )}
+        <span>{product.name}</span>
+      </div>
+    </Link>
+  );
+}
 
 export default function NavBar() {
   const { isAuthenticated } = useGetAuthStatus();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState("");
-  const {
-    isproductBySearchError,
-    productBySearchData,
-    productBySearchRefetch,
-    isproductBySearchLoading,
-  } = useGetProductBySearch({ search: searchInput, page: 1, limit: 12 });
+  const { productBySearchData, productBySearchRefetch } = useGetProductBySearch({
+    search: searchInput,
+    page: 1,
+    limit: 12,
+  });
   const loginModal = useGetLoginModalState();
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
- 
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -77,21 +95,26 @@ export default function NavBar() {
   const user = useUserSlice((state) => state);
 
   useEffect(() => {
-    cartDetails && cartDetails?.cart && setCartCount(cartDetails?.cart?.length);
+    if (cartDetails?.cart) {
+      setCartCount(cartDetails.cart.length);
+    }
   }, [cartDetails?.cart]);
 
   useEffect(() => {
-    wishlistData &&
-      wishlistData?.length > 0 &&
-      setWishlistCount(wishlistData?.length);
+    if (wishlistData && wishlistData.length > 0) {
+      setWishlistCount(wishlistData.length);
+    }
   }, [wishlistData, isWishlistLoading]);
 
   const toggleDropdown = (index: number) => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
+
   useEffect(() => {
-    if (authToken && isAuthenticated) setIsLoggedIn(isAuthenticated);
-  }, [isAuthenticated]);
+    if (authToken && isAuthenticated) {
+      setIsLoggedIn(isAuthenticated);
+    }
+  }, [isAuthenticated, authToken]); // Added missing dependencies
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -147,8 +170,10 @@ export default function NavBar() {
   ];
 
   useEffect(() => {
-    searchInput.trim() && productBySearchRefetch();
-  }, [searchInput]);
+    if (searchInput.trim()) {
+      productBySearchRefetch();
+    }
+  }, [searchInput, productBySearchRefetch]); // Added missing dependency
 
   function getWish() {
     const currentHour = new Date().getHours();
@@ -209,7 +234,8 @@ export default function NavBar() {
                 <>
                   <div className="pb-2 border-b">
                     <p className="text-lg">
-                      {getWish()}! <span className="font-semibold">{user.name}</span>
+                      {getWish()}!{" "}
+                      <span className="font-semibold">{user.name}</span>
                     </p>
                   </div>
                   {profileMenus.map((item, idx) => (
@@ -233,7 +259,10 @@ export default function NavBar() {
                     <LogIn className="w-6 h-6" />
                     Login
                   </div>
-                  <Link href="/signup" className="block py-2 hover:text-gray-600 flex items-center gap-2">
+                  <Link
+                    href="/signup"
+                    className="block py-2 hover:text-gray-600 flex items-center gap-2"
+                  >
                     <User className="w-6 h-6" />
                     Signup
                   </Link>
@@ -260,10 +289,10 @@ export default function NavBar() {
         <div className="flex h-full items-center justify-between w-full px-4 lg:px-18">
           {/* Logo */}
           <div>
-          <Link href="/">
-            <h2 className="font-[700] text-2xl text-white">ROLBOL</h2>
-          </Link>
-        </div>
+            <Link href="/">
+              <h2 className="font-[700] text-2xl text-white">ROLBOL</h2>
+            </Link>
+          </div>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -286,55 +315,61 @@ export default function NavBar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex h-full items-center justify-between">
-          <nav role="navigation" className="h-full">
-            <ul className="group flex h-full items-center justify-center gap-4 text-white *:text-[16px]">
-              {navdata.map((item, index) => (
-                <li
-                  key={index}
-                  className="relative group"
-                  onMouseEnter={() => setOpenDropdown(index)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <Link href={item.link} className="relative flex items-center px-3 py-[14px] font-medium">
-                    <span>{item.name}</span>
-                    {item.dropdown && (
-                      <motion.svg
-                        className="ml-1 h-6 w-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        animate={{ rotate: openDropdown === index ? 180 : 0 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.23 8.27a.75.75 0 01.02-1.06z"
-                          clipRule="evenodd"
-                        />
-                      </motion.svg>
-                    )}
-                  </Link>
-                  <AnimatePresence>
-                    {item.dropdown && openDropdown === index && (
-                      <motion.ul
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 0 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="absolute left-0 min-w-[200px] px-3 py-5 bg-white font-[500] text-black shadow-xl overflow-hidden rounded-lg"
-                      >
-                        {item.dropdown.map((subItem, subIndex) => (
-                          <li key={subIndex} className="px-4 py-2 hover:text-gray-600 text-[16px] whitespace-nowrap">
-                            <Link href={subItem.link}>{subItem.title}</Link>
-                          </li>
-                        ))}
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
-                </li>
-              ))}
-            </ul>
-          </nav>
+            <nav role="navigation" className="h-full">
+              <ul className="group flex h-full items-center justify-center gap-4 text-white *:text-[16px]">
+                {navdata.map((item, index) => (
+                  <li
+                    key={index}
+                    className="relative group"
+                    onMouseEnter={() => setOpenDropdown(index)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <Link
+                      href={item.link}
+                      className="relative flex items-center px-3 py-[14px] font-medium"
+                    >
+                      <span>{item.name}</span>
+                      {item.dropdown && (
+                        <motion.svg
+                          className="ml-1 h-6 w-6"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          animate={{ rotate: openDropdown === index ? 180 : 0 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.23 8.27a.75.75 0 01.02-1.06z"
+                            clipRule="evenodd"
+                          />
+                        </motion.svg>
+                      )}
+                    </Link>
+                    <AnimatePresence>
+                      {item.dropdown && openDropdown === index && (
+                        <motion.ul
+                          initial={{ opacity: 0, x: 30 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: 0 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                          className="absolute left-0 min-w-[200px] px-3 py-5 bg-white font-[500] text-black shadow-xl overflow-hidden rounded-lg"
+                        >
+                          {item.dropdown.map((subItem, subIndex) => (
+                            <li
+                              key={subIndex}
+                              className="px-4 py-2 hover:text-gray-600 text-[16px] whitespace-nowrap"
+                            >
+                              <Link href={subItem.link}>{subItem.title}</Link>
+                            </li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
             {/* Desktop Icons */}
             <div className="ml-6 flex items-center gap-4">
@@ -348,7 +383,11 @@ export default function NavBar() {
                       ? router.push("/wishlist")
                       : changeLoginModalType("MOBILE_INPUT"),
                 },
-                { name: "cart", icon: ShoppingBag, function: () => router.push("/checkout") },
+                {
+                  name: "cart",
+                  icon: ShoppingBag,
+                  function: () => router.push("/checkout"),
+                },
                 { name: "avatar", icon: User },
               ].map((Icon, index) => (
                 <div
@@ -373,7 +412,9 @@ export default function NavBar() {
                       {wishlistCount}
                     </span>
                   )}
-                  {!Icon.function && openMenu && MenuItems(Icon, openMenu, isLoggedIn)}
+                  {!Icon.function &&
+                    openMenu &&
+                    MenuItems(Icon, openMenu, isLoggedIn)}
                 </div>
               ))}
             </div>
@@ -383,7 +424,6 @@ export default function NavBar() {
           {mobileMenuOpen && (
             <div className="absolute top-[80px] left-0 w-full h-[100vh] bg-black text-white lg:hidden">
               <ul className="flex flex-col items-start py-4">
-          
                 <li className="w-full py-2 px-4">
                   <div className="flex items-center gap-2">
                     <Search size={24} />
@@ -401,7 +441,8 @@ export default function NavBar() {
                     className="text-2xl flex items-center gap-2"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Heart size={24} /> Wishlist {wishlistCount > 0 && `(${wishlistCount})`}
+                    <Heart size={24} /> Wishlist{" "}
+                    {wishlistCount > 0 && `(${wishlistCount})`}
                   </Link>
                 </li>
                 <li className="w-full py-2 px-4">
@@ -410,7 +451,8 @@ export default function NavBar() {
                     className="text-2xl flex items-center gap-2"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <ShoppingBag size={24} /> Cart {cartCount > 0 && `(${cartCount})`}
+                    <ShoppingBag size={24} /> Cart{" "}
+                    {cartCount > 0 && `(${cartCount})`}
                   </Link>
                 </li>
                 {isLoggedIn ? (
