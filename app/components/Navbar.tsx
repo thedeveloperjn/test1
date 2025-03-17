@@ -420,82 +420,137 @@ export default function NavBar() {
             </div>
           </div>
 
+
+
+
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <div className="absolute top-[80px] left-0 w-full h-[100vh] bg-black text-white lg:hidden">
-              <ul className="flex flex-col items-start py-4">
-                <li className="w-full py-2 px-4">
-                  <div className="flex items-center gap-2">
-                    <Search size={24} />
-                    <Input
-                      onChange={onSearchChange}
-                      type="text"
-                      className="bg-transparent border-b text-white"
-                      placeholder="Search..."
-                    />
+  <div className="absolute top-[80px] left-0 w-full h-[100vh] bg-black text-white lg:hidden">
+    <ul className="flex flex-col items-start py-4">
+      
+      <li className="w-full py-2 px-4">
+        <div className="flex items-center gap-2">
+          <Search size={24} />
+          <Input
+            onChange={onSearchChange}
+            type="text"
+            className="bg-transparent border-b text-white"
+            placeholder="Search..."
+          />
+        </div>
+      </li>
+      {navdata.map((item, index) => (
+                <li key={index} className="w-full">
+                  <div
+                    className="flex items-center justify-between w-full py-2 px-4 cursor-pointer"
+                    onClick={() => toggleDropdown(index)}
+                  >
+                    <Link
+                      href={item.link}
+                      className="text-2xl"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                    {item.dropdown && (
+                      <motion.svg
+                        className="h-6 w-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        animate={{ rotate: openDropdown === index ? 180 : 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.23 8.27a.75.75 0 01.02-1.06z"
+                          clipRule="evenodd"
+                        />
+                      </motion.svg>
+                    )}
                   </div>
-                </li>
-                <li className="w-full py-2 px-4">
-                  <Link
-                    href="/wishlist"
-                    className="text-2xl flex items-center gap-2"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Heart size={24} /> Wishlist{" "}
-                    {wishlistCount > 0 && `(${wishlistCount})`}
-                  </Link>
-                </li>
-                <li className="w-full py-2 px-4">
-                  <Link
-                    href="/checkout"
-                    className="text-2xl flex items-center gap-2"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <ShoppingBag size={24} /> Cart{" "}
-                    {cartCount > 0 && `(${cartCount})`}
-                  </Link>
-                </li>
-                {isLoggedIn ? (
-                  profileMenus.map((item, idx) => (
-                    <li key={idx} className="w-full py-2 px-4">
-                      <div
-                        className="text-2xl flex items-center gap-2 cursor-pointer"
-                        onClick={() => {
-                          item.action();
-                          setMobileMenuOpen(false);
-                        }}
+                  <AnimatePresence>
+                    {item.dropdown && openDropdown === index && (
+                      <motion.ul
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="bg-[#202120] text-white rounded-lg m-2 mr-3 px-1 py-3 overflow-hidden"
                       >
-                        {item.icon} {item.name}
-                      </div>
-                    </li>
-                  ))
-                ) : (
-                  <>
-                    <li className="w-full py-2 px-4">
-                      <div
-                        className="text-2xl flex items-center gap-2 cursor-pointer"
-                        onClick={() => {
-                          changeLoginModalType("MOBILE_INPUT");
-                          setMobileMenuOpen(false);
-                        }}
-                      >
-                        <LogIn size={24} /> Login
-                      </div>
-                    </li>
-                    <li className="w-full py-2 px-4">
-                      <Link
-                        href="/signup"
-                        className="text-2xl flex items-center gap-2"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        <User size={24} /> Signup
-                      </Link>
-                    </li>
-                  </>
-                )}
-              </ul>
+                        {item.dropdown.map((subItem, subIndex) => (
+                          <li key={subIndex} className="px-4 py-2 hover:text-gray-500">
+                            <Link href={subItem.link} onClick={() => setMobileMenuOpen(false)}>
+                              {subItem.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                </li>
+              ))}
+      <li className="w-full py-2 px-4">
+        <Link
+          href="/wishlist"
+          className="text-2xl flex items-center gap-2"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <Heart size={24} /> Wishlist{" "}
+          {wishlistCount > 0 && `(${wishlistCount})`}
+        </Link>
+      </li>
+      <li className="w-full py-2 px-4">
+        <Link
+          href="/checkout"
+          className="text-2xl flex items-center gap-2"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <ShoppingBag size={24} /> Cart{" "}
+          {cartCount > 0 && `(${cartCount})`}
+        </Link>
+      </li>
+      {isLoggedIn ? (
+        profileMenus.map((item, idx) => (
+          <li key={idx} className="w-full py-2 px-4">
+            <div
+              className="text-2xl flex items-center gap-2 cursor-pointer"
+              onClick={() => {
+                item.action();
+                setMobileMenuOpen(false);
+              }}
+            >
+              {item.icon} {item.name}
             </div>
-          )}
+          </li>
+        ))
+      ) : (
+        <>
+          <li className="w-full py-2 px-4">
+            <div
+              className="text-2xl flex items-center gap-2 cursor-pointer"
+              onClick={() => {
+                changeLoginModalType("MOBILE_INPUT");
+                setMobileMenuOpen(false);
+              }}
+            >
+              <LogIn size={24} /> Login
+            </div>
+          </li>
+          <li className="w-full py-2 px-4">
+            <Link
+              href="/signup"
+              className="text-2xl flex items-center gap-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <User size={24} /> Signup
+            </Link>
+          </li>
+        </>
+      )}
+    </ul>
+  </div>
+)}   
         </div>
         <AuthDialog
           isOpen={loginModal}
