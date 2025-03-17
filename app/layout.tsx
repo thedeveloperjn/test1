@@ -28,20 +28,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-        {/* External FontAwesome stylesheet */}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
-
-        {/* Wrap ScrollToTop in Suspense */}
         <Suspense fallback={<div className="h-12" />}>
           <ScrollToTop />
         </Suspense>
-
-        {/* ClientWrapper will handle NavBar dynamically */}
         <ClientWrapper>{children}</ClientWrapper>
-
         <Footer />
       </body>
     </html>

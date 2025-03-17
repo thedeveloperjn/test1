@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
-// Dynamically load NavBar with SSR disabled
 const NavBar = dynamic(() => import("./Navbar"), { ssr: false });
 
 export default function ClientWrapper({ children }: { children: React.ReactNode }) {
