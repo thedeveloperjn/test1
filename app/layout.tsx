@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -5,6 +6,8 @@ import ClientWrapper from "./components/ClientWrapper";
 import ScrollToTop from "./components/Scrolltotop";
 import Footer from "./components/Footer";
 import { Suspense } from "react";
+import { PlayerProvider } from "./context/PlayerContext"; // Import PlayerProvider
+import StickyPlayer from "./components/StickyPlayer"; // Import StickyPlayer
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,11 +51,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-        <Suspense fallback={<div className="h-12" />}>
-          <ScrollToTop />
-        </Suspense>
-        <ClientWrapper>{children}</ClientWrapper>
-        <Footer />
+        {/* Wrap the entire app with PlayerProvider */}
+        <PlayerProvider>
+          <Suspense fallback={<div className="h-12" />}>
+            <ScrollToTop />
+          </Suspense>
+          <ClientWrapper>
+            {children}
+            {/* Render the sticky player globally */}
+            <StickyPlayer />
+          </ClientWrapper>
+          <Footer />
+        </PlayerProvider>
       </body>
     </html>
   );

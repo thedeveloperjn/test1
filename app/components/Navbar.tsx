@@ -116,24 +116,27 @@ export default function NavBar() {
       setIsLoggedIn(isAuthenticated);
     }
   }, [isAuthenticated, authToken]); // Added missing dependencies
-
-  useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== "undefined") {
+useEffect(() => {
+  const controlNavbar = () => {
+    if (typeof window !== "undefined") {
+      if (window.scrollY > 200) { // Only activate after scrolling 200px
         if (window.scrollY > lastScrollY) {
-          setIsVisible(false);
+          setIsVisible(false); // Hide on scroll down
         } else {
-          setIsVisible(true);
+          setIsVisible(true); // Show on scroll up
         }
         setLastScrollY(window.scrollY);
+      } else {
+        setIsVisible(true); // Ensure navbar is visible before 200px
       }
-    };
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", controlNavbar);
-      return () => window.removeEventListener("scroll", controlNavbar);
     }
-  }, [lastScrollY]);
+  };
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", controlNavbar);
+    return () => window.removeEventListener("scroll", controlNavbar);
+  }
+}, [lastScrollY]);
 
   const profileMenus = [
     {
