@@ -80,7 +80,7 @@ export default async function BlogDetail({
           <div className="w-[100%] lg:w-[70%]">
             <BlogBanner banner={blog.banner} title={blog.title} />
             <div
-              className="text-[#ffffff99] text-[16px] font-lighter text-justify tracking-[0.6px] leading-7 mt-6"
+              className="text-[#ffffff99] text-[14px]  md:text-[16px] font-lighter text-justify tracking-[0.6px] leading-7 mt-6"
               dangerouslySetInnerHTML={{ __html: blog.description }}
             />
             <div className="description-block mt-10">
@@ -148,7 +148,7 @@ export default async function BlogDetail({
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <div className="relative w-full h-full min-h-[200px]">
+                              <div className="relative w-full h-full ">
                               <img
                       src={`${Image_url}${image}`}
                       alt="Blog Gallery"
