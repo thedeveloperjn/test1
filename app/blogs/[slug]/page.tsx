@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Suspense } from "react";
 import { fetchAllPosts } from "../../utils/api";
-
+import LightboxKeyboardHandler from "../../components/LightboxKeyboardHandler";
 // Define the types for the blog post data
 interface BlogPost {
   title: string;
@@ -275,30 +275,9 @@ export default async function BlogDetail({ params }: PageProps) {
         </div>
       ))}
 
-   
-
-      {/* Keyboard Navigation Script */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          document.addEventListener("keydown", (e) => {
-            const lightbox = document.querySelector(".lightbox:target");
-            if (!lightbox) return;
-
-            const currentIndex = parseInt(lightbox.id.split("-")[1]);
-            const totalImages = ${allImages.length};
-
-            if (e.key === "ArrowLeft") {
-              const prevIndex = (currentIndex - 1 + totalImages) % totalImages;
-              window.location.href = "#lightbox-" + prevIndex;
-            } else if (e.key === "ArrowRight") {
-              const nextIndex = (currentIndex + 1) % totalImages;
-              window.location.href = "#lightbox-" + nextIndex;
-            } else if (e.key === "Escape") {
-              window.location.href = "#";
-            }
-          });
-        `,
-      }} />
+      {/* Add the LightboxKeyboardHandler component */}
+      <LightboxKeyboardHandler totalImages={allImages.length} />
     </div>
   );
+
 }
