@@ -143,8 +143,7 @@ const PodcastPage = () => {
       .trim()
       .split("\n")
       .filter((line) => line.trim() !== "") // Remove empty lines
-      .join("<br/>") // Convert back to HTML with line breaks
-      .replace(/([A-Za-z\s]+):/gm, '<strong class="capitalize tracking-[-0.05em] text-black">$1</strong>:') // Apply styles correctly
+      .join("<br/>") 
   }}
 />
 
