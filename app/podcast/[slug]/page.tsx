@@ -56,7 +56,7 @@ const PodcastPage = () => {
   }, [setPodcast]);
 
   if (loading) {
-    return <div className="text-white text-center">Loading YouTube video...</div>;
+    return <div className="text-white text-center"></div>;
   }
 
   if (error) {
@@ -64,23 +64,25 @@ const PodcastPage = () => {
   }
 
   return (
-    <div className="flex  items-center m-5 rounded-[12px] bg-[#181818] text-white min-h-screen p-6 py-20">
-      <div className="flex  max-w-[1200px] m-auto justify-between">
-      <div className="w-[37%] text-center">
+    <div className="flex  items-center bg-white text-white min-h-screen p-2 xl:p-6 xl:py-20">
+      <div className="xl:flex  max-w-[1150px] m-auto xl:justify-between justify-center ">
+      <div className="xl:w-[40%]  text-center xl:sticky self-start top-[65px]">
+        <div className="rounded-[12px] bg-[#181818] p-8">
         {/* Podcast Image */}
         <Image
           src={podcast.imageSrc}
           alt={podcast.title}
-          width={300}
-          height={300}
+          width={400}
+          height={400}
           className="rounded-lg mx-auto mb-4"
           unoptimized
         />
-        <p className="text-[#ffffff66] text-sm">
+         <p className="text-[#ffffff66] block xl:hidden text-sm">
           {podcast.category} • {podcast.date}
         </p>
-        <h2 className="text-[30px] md:text-[32px] text-white font-[100] mt-2 -tracking-[0.01em] text-center pb-2 font-movatif leading-[40px] md:leading-[40px]">{podcast.title}</h2>
+        <h2 className="text-[30px] block xl:hidden md:text-[32px] text-white  mt-2  font-semibold -tracking-[0.02em] text-center pb-2 font-movatif leading-[40px] md:leading-[40px]">{podcast.title}</h2>
 
+         <p className="text-[#ffffff66] font-movatif  hidden xl:block text-md">{podcast.title}</p>
         {/* Main Progress Bar */}
         <div
           className="w-full bg-gray-700 h-1 rounded-full mt-4 relative cursor-pointer"
@@ -112,9 +114,14 @@ const PodcastPage = () => {
             <span className="absolute text-xs top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">30</span>
           </button>
         </div>
+        </div>
       </div>
-      <div className="w-[57%]">
-        
+      <div className="xl:w-[54%] ">
+      <p className="text-[#00000099] font-ibmflexmono font-[500] text-sm mt-5 hidden xl:block ">
+          {podcast.category} • {podcast.date}
+        </p>
+        <h2 className="text-[30px] text-black hidden xl:block md:text-[70px] font-semibold font-movatif font-[100] mt-2 mb-4 -tracking-[0.02em]  pb-2 leading-[40px] md:leading-[70px]">{podcast.title}</h2>
+
         {/* YouTube Video Embed */}
         {videoDetails && (
           <div className="">
@@ -126,15 +133,26 @@ const PodcastPage = () => {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className="w-full aspect-video rounded-lg"
+              className="w-full h-full mt-2 xl:mt-0 aspect-video rounded-lg"
             ></iframe>
             {/* <h3 className="text-[30px] md:text-[32px] text-white font-[100] mt-4 -tracking-[0.01em] text-center pb-14 font-movatif leading-[40px] md:leading-[40px]">{videoDetails.title}</h3> */}
-           <p
-  className="text-[#ffffff66] mt-4 text-[15px] md:text-[18px]"
+            <p
+  className="text-[#00000099] mt-4 px-2 text-[15px] leading-[28px] -tracking-[0.03em] font-ibmplexmono md:leading-[36px] pb-8 xl:pb-0 md:text-[18px]"
   dangerouslySetInnerHTML={{
-    __html: videoDetails.description.replace(/\n/g, "<br />"),
+    __html: videoDetails.description
+      .trim()
+      .split("\n")
+      .filter((line) => line.trim() !== "") // Remove empty lines
+      .join("<br/>") // Convert back to HTML with line breaks
+      .replace(/([A-Za-z\s]+):/gm, '<strong class="capitalize tracking-[-0.05em] text-black">$1</strong>:') // Apply styles correctly
   }}
 />
+
+
+
+
+
+
           </div>
         )}
 
