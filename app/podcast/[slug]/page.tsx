@@ -117,7 +117,7 @@ const PodcastPage = () => {
         </div>
       </div>
       <div className="xl:w-[54%] ">
-      <p className="text-[#00000099] font-ibmflexmono font-[500] text-sm mt-5 hidden xl:block ">
+      <p className="text-[#00000099] font-ibmflexmono font-[600] text-sm mt-5 hidden xl:block ">
           {podcast.category} • {podcast.date}
         </p>
         <h2 className="text-[30px] text-black hidden xl:block md:text-[70px] font-semibold font-movatif font-[100] mt-2 mb-4 -tracking-[0.02em]  pb-2 leading-[40px] md:leading-[70px]">{podcast.title}</h2>
