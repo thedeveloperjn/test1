@@ -3,6 +3,7 @@
 
 import { navdata } from "../data";
 import { Button } from "../components/Button";
+
 import { useQueryWithLoading } from "../hooks/useGlobalHook";
 import { Product } from "../interfaces/product/product";
 import { removeSession } from "../lib/session";
@@ -80,7 +81,7 @@ export default function NavBar() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const [isScrolled, setIsScrolled] = useState(false);
   const cartDetails = useCartSlice((state) => state.cartDetails);
   const [cartCount, setCartCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
@@ -116,28 +117,27 @@ export default function NavBar() {
       setIsLoggedIn(isAuthenticated);
     }
   }, [isAuthenticated, authToken]); // Added missing dependencies
-useEffect(() => {
-  const controlNavbar = () => {
-    if (typeof window !== "undefined") {
-      if (window.scrollY > 200) { // Only activate after scrolling 200px
-        if (window.scrollY > lastScrollY) {
-          setIsVisible(false); // Hide on scroll down
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== "undefined") {
+        if (window.scrollY > 200) {
+          setIsScrolled(true); // Set background to black
+          if (window.scrollY > lastScrollY) {
+            setIsVisible(false); // Hide on scroll down
+          } else {
+            setIsVisible(true); // Show on scroll up
+          }
+          setLastScrollY(window.scrollY);
         } else {
-          setIsVisible(true); // Show on scroll up
+          setIsScrolled(false); // Keep background transparent before 200px
+          setIsVisible(true);
         }
-        setLastScrollY(window.scrollY);
-      } else {
-        setIsVisible(true); // Ensure navbar is visible before 200px
       }
-    }
-  };
+    };
 
-  if (typeof window !== "undefined") {
     window.addEventListener("scroll", controlNavbar);
     return () => window.removeEventListener("scroll", controlNavbar);
-  }
-}, [lastScrollY]);
-
+  }, [lastScrollY]);
   const profileMenus = [
     {
       name: "Profile",
@@ -285,16 +285,24 @@ useEffect(() => {
   if (allCategoriesData && allCategoriesData?.length >= 2)
     return (
       <nav
-        className={cn(
-          "border-b border-[#ffffff21] bg-black sticky top-0 z-40 flex h-[80px] items-center transition-transform duration-300",
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        )}
-      >
+      className={cn(
+        "sticky top-0 z-40 flex h-[80px] items-center transition-transform duration-300",
+        isVisible ? "translate-y-0" : "-translate-y-full",
+        isScrolled ? "bg-black backdrop-blur-md shadow-lg" : "bg-transparent"
+      )}
+    >
         <div className="flex h-full items-center justify-between w-full px-4 lg:px-18">
           {/* Logo */}
           <div>
             <Link href="/">
-              <h2 className="font-[700] text-2xl text-white">ROLBOL</h2>
+            <Image
+  src="/logo.png"
+  alt="logo"
+  width={150}
+  height={50}
+  className=" object-cover rounded-lg  cursor-pointer"
+/>
+
             </Link>
           </div>
 
@@ -320,7 +328,7 @@ useEffect(() => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex h-full items-center justify-between">
             <nav role="navigation" className="h-full">
-              <ul className="group flex h-full items-center justify-center gap-4 text-white *:text-[16px]">
+              <ul className="group flex h-full items-center justify-center gap-4 text-white *:text-[16x]">
                 {navdata.map((item, index) => (
                   <li
                     key={index}
@@ -335,7 +343,7 @@ useEffect(() => {
                       <span>{item.name}</span>
                       {item.dropdown && (
                         <motion.svg
-                          className="ml-1 h-6 w-6"
+                          className="ml-1 h-5 w-5"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"

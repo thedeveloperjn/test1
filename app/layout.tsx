@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import { Suspense } from "react";
 import { PlayerProvider } from "./context/PlayerContext"; // Import PlayerProvider
 import StickyPlayer from "./components/StickyPlayer"; // Import StickyPlayer
+import '@fontsource/noto-sans/400.css'; // Regular
+import '@fontsource/noto-sans/700.css'; // Bold
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,17 +20,24 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 export const metadata: Metadata = {
   title: "ROLBOL",
   description: "Your description here",
+  icons: {
+    icon: "/favicon.ico", 
+    apple: "/favicon.ico", // For Apple devices
+  },
 };
+
+
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         {/* Font Awesome */}
+        
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"

@@ -13,9 +13,14 @@
   font-style: normal;
 }
 
+
+.noto-sans{
+  font-family: 'Noto Sans', sans-serif;
+}
+
 .test-wrapper .swiper-wrapper{
-  padding-left: 30px;
-  gap: 25px;
+  padding-left: 60px;
+  gap: 15px;
 }
 
 @media (max-width:768px) {
@@ -83,10 +88,22 @@ body {
 }
 
 
-   
+   .initiatives .swiper-wrapper {
+    gap: 20px;
+   }
  
    
-
+.init-card::after{
+  content: "";
+    position: absolute;
+    top: 15px;
+    bottom: 15px;
+    right: 15px;
+    left: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.542);
+    pointer-events: none;
+}
    
     .image-counter {
       position: absolute;
@@ -100,7 +117,11 @@ body {
       border-radius: 8px;
     }
  
-
+@media (min-width:768px) {
+  .testimonial-wrapper .swiper-wrapper{
+    padding-left: 30px;
+  }
+}
 
 
   .lightbox {
@@ -177,3 +198,58 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
   }
+
+  iframe {
+    pointer-events: none; /* Prevents interactions, remove if needed */
+}
+
+.ytp-chrome-top, 
+.ytp-chrome-bottom, 
+.ytp-watch-later-button, 
+.ytp-share-button, 
+.ytp-title,
+.ytp-issue-indicator,
+.ytp-youtube-button {
+    display: none !important;
+}
+
+
+  @layer utilities {
+    .gradient-text {
+      @apply bg-gradient-to-r from-[#6D78EB] via-[#53D5E8] via-[#6A81EB] to-[#794CEC] bg-clip-text text-transparent;
+    }
+    .button-blur{
+      @apply px-6 py-2 my-3 mb-5 rounded-full flex justify-center h-[50px] items-center  backdrop-blur-[20px] gap-2 border border-white/30 bg-white/5   w-auto hover:bg-white/20 text-white transition
+    }
+    
+  }
+  
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  
+  @keyframes marquee-reverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+  
+ 
+  .animate-marquee-home {
+    display: flex;
+    width: max-content;
+    animation: marquee 45s linear infinite;
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 20s linear infinite;
+  }
+  
+  .animate-marquee-reverse {
+    display: flex;
+    width: max-content;
+    animation: marquee-reverse 20s linear infinite;
+  }
+  

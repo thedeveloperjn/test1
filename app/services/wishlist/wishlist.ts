@@ -19,36 +19,39 @@ interface wishlistResponseInterface {
 }
 
 export const useGetAllWishlist = () => {
-    const authToken = useAuthSlice.getState().authToken
-    const userId = useUserSlice.getState()._id
-    const {
-        data,
-        isLoading,
-        isError,
-        error,
-        refetch
-    }: UseQueryResult<wishlistResponseInterface, AxiosError> = useQuery({
-        queryKey: ['_getAllWishlist'],
-        queryFn: () =>
-            axiosInstance.get<wishlistResponseInterface>(
-                '/wishlist/list',
-                authToken && userId
-                    ? {
-                        headers: { Authorization: `Barear ${authToken}` }
-                    }
-                    : {}
-            )
-    })
+  const authToken = useAuthSlice.getState().authToken;
+  const userId = useUserSlice.getState()._id;
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  }: UseQueryResult<wishlistResponseInterface, AxiosError> = useQuery({
+    queryKey: ['_getAllWishlist'],
+    queryFn: () =>
+      axiosInstance.get<wishlistResponseInterface>(
+        '/wishlist/list',
+        authToken && userId
+          ? {
+              headers: { Authorization: `Bearer ${authToken}` },
+            }
+          : {}
+      ),
+  });
 
-    return {
-        wishlistData: data?.data?.data ?? null,
-        isWishlistLoading: isLoading,
-        isWishlistError: isError,
-        error: isError ? error : null,
-        refetchWishlist: refetch
-    }
-}
+  console.log("Wishlist Data:", data); // Log the data
+  console.log("Loading:", isLoading); // Log the loading state
+  console.log("Error:", error); // Log any errors
 
+  return {
+    wishlistData: data?.data?.data ?? null,
+    isWishlistLoading: isLoading,
+    isWishlistError: isError,
+    error: isError ? error : null,
+    refetchWishlist: refetch,
+  };
+};
 
 export const useAddToWishlist = () => {
     const queryClient = useQueryClient();

@@ -1,6 +1,6 @@
-import { CollectionsResponse, SubcategoryResponse } from "@/interfaces/categories/sub-category";
-import { axiosInstance } from "@/lib/axios";
-import { CATEGORY_API } from "@/utils/constants/apiEndpoints";
+import { CollectionsResponse, SubcategoryResponse } from "../../interfaces/categories/sub-category";
+import { axiosInstance } from "../../lib/axios";
+import { CATEGORY_API } from "../../utils/constants/apiEndpoints";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 

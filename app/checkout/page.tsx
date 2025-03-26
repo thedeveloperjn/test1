@@ -208,10 +208,10 @@ export default function CheckoutPage() {
             key: process.env.RAZORPAY_KEY_ID || "rzp_live_0Gcfu2r8Cx5MXe",
             amount: order?.amount,
             currency: "INR",
-            name: "Gifting Saga",
+            name: "ROLBOL",
             description: "Test Transaction",
             image:
-              "https://doubletick-s3.s3.ap-south-1.amazonaws.com/giftingsaga-s3-bucket/giftingsaga-logo.png",
+              "./rb.png",
             order_id: order.id,
             handler: async (res) => {
               let tempOrderPayload = OrderPayload;

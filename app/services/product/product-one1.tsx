@@ -1,5 +1,5 @@
 
-import { BASE_URL,} from "@/utils/constants/apiEndpoints";
+import { BASE_URL,} from "../../utils/constants/apiEndpoints";
 
 
 

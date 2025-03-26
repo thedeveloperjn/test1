@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "../components/ui/accordion";
 import { FilterProps } from "../interfaces/filter/filter";
 import { cn } from "../lib/utils";
 import { getAllCategories } from "../services/category/category";
@@ -12,7 +12,7 @@ import { getAllOccassions } from "../services/occassion/occassion";
 import { changeFilter } from "../store/action/filter";
 import { WEAVING_PATTERN, ZARI } from "../utils/constants/filter";
 import { useRouter } from "next/navigation";
-import FilterOptionComp from "../filter-option-comp";
+import FilterOptionComp from "./filter-option-comp";
 import { PriceRangeSlider } from "./price-slider";
 
 type SidebarProps = {

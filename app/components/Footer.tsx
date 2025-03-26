@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-black relative border-t border-[#ffffff21] text-white p-10 pt-20">
+    <footer className="bg-black relative  text-white p-10 pt-20">
       <div className=" mx-auto">
         {/* Desktop View */}
         <div className=" flex lg:pb-18 flex-col lg:flex-row">

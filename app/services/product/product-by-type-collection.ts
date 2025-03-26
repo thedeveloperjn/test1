@@ -1,7 +1,7 @@
-import { ProductsByTypeApiResponse } from "@/interfaces/product/product";
-import { axiosInstance } from "@/lib/axios";
-import { useAuthSlice } from "@/store/main-store";
-import { PRODUCT_API } from "@/utils/constants/apiEndpoints";
+import { ProductsByTypeApiResponse } from "../../interfaces/product/product";
+import { axiosInstance } from "../../lib/axios";
+import { useAuthSlice } from "../../store/main-store";
+import { PRODUCT_API } from "../../utils/constants/apiEndpoints";
 import { useQuery } from "@tanstack/react-query";
 // All Product By Type And Category
 export const getAllProductsByTypeCollection = (collection: string, type: string, paramUrl: string, page: number, limit: number,) => {

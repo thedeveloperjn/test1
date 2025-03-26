@@ -1,5 +1,4 @@
-// components/LightboxKeyboardHandler.js
-"use client"; // Mark this as a client component
+"use client"; 
 
 import { useEffect } from "react";
 
@@ -22,14 +21,13 @@ export default function LightboxKeyboardHandler({ totalImages }) {
       }
     };
 
-    // Attach the event listener
     document.addEventListener("keydown", handleKeyDown);
 
-    // Cleanup the event listener
+   
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [totalImages]);
 
-  return null; // This component doesn't render anything
+  return null; 
 }

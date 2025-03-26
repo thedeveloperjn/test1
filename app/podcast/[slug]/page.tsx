@@ -66,7 +66,7 @@ const PodcastPage = () => {
   return (
     <div className="flex  items-center bg-white text-white min-h-screen p-2 xl:p-6 xl:py-20">
       <div className="xl:flex  max-w-[1150px] m-auto xl:justify-between justify-center ">
-      <div className="xl:w-[40%]  text-center xl:sticky self-start top-[65px]">
+      <div className="xl:w-[40%]  text-center xl:sticky self-start top-[40px]">
         <div className="rounded-[12px] bg-[#181818] p-8">
         {/* Podcast Image */}
         <Image

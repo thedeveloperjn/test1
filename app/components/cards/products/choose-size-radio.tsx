@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 import React from "react";
 
 interface RadioGroupProps {
@@ -21,9 +21,9 @@ const SizeSelectionRadio: React.FC<RadioGroupProps> = ({
           <label
             key={option}
             className={cn(
-              `block mb-2 cursor-pointer border border-gray-300 p-1 px-2 rounded-[10px] hover:text-white hover:bg-[#F3238A]`,
+              `block mb-2 cursor-pointer border border-gray-300 p-1 px-2 rounded-[10px] hover:text-white hover:bg-black`,
               {
-                "border-[#F3238A] bg-[#F3238A] text-white": selectedOption === option,
+                "border-black bg-black text-white": selectedOption === option,
               }
             )}
           >

@@ -1,9 +1,9 @@
 "use client"
-import { Product, ProductsBySlugApiResponse } from "@/interfaces/product/product";
-import { axiosInstance } from "@/lib/axios";
-import { useAuthSlice } from "@/store/main-store";
-import { BASE_URL, PRODUCT_API } from "@/utils/constants/apiEndpoints";
-import localStorageAvailable from "@/utils/functions/localStorageAvailable";
+import { Product, ProductsBySlugApiResponse } from "../../interfaces/product/product";
+import { axiosInstance } from "../../lib/axios";
+import { useAuthSlice } from "../../store/main-store";
+import { BASE_URL, PRODUCT_API } from "../../utils/constants/apiEndpoints";
+import localStorageAvailable from "../../utils/functions/localStorageAvailable";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from 'next/navigation';
 

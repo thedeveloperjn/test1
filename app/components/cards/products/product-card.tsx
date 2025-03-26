@@ -73,7 +73,7 @@ ProductOne?.variants?.forEach((variant) => {
 const queryString = queryParamsArray.join("&");
 
 // Construct the final product path
-const productPath = `/dp${queryParams}?${queryString}`;
+const productPath = `/merchandise${queryParams}?${queryString}`;
 
 console.log(productPath);
 

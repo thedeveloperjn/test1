@@ -66,7 +66,7 @@ export function ProductCardWishlist(ProductOne: Product) {
   // }
 
   // const productPath = `/products${queryParams}`;
-  const productPath = `/dp/${queryParams}`;
+  const productPath = `/merchandise/${queryParams}`;
 
   const checkStocks = checkProductStock(
     ProductOne,

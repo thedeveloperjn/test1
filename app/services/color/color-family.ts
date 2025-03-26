@@ -1,8 +1,8 @@
-import { CategoryResponse } from "@/interfaces/categories/caegory";
-import { getAllColorFamilyResponse } from "@/interfaces/color/color-family";
-import { getAllOcassionResponse } from "@/interfaces/occassion/occassion";
-import { axiosInstance } from "@/lib/axios";
-import { COLOR_FAMILY_API } from "@/utils/constants/apiEndpoints";
+import { CategoryResponse } from "../../interfaces/categories/caegory";
+import { getAllColorFamilyResponse } from "../../interfaces/color/color-family";
+import { getAllOcassionResponse } from "../../interfaces/occassion/occassion";
+import { axiosInstance } from "../../lib/axios";
+import { COLOR_FAMILY_API } from "../../utils/constants/apiEndpoints";
 import { useQuery } from "@tanstack/react-query";
 // All Dextop Banner
 export const getAllColorFamily = () => {

@@ -1,6 +1,6 @@
-import { Product } from "@/interfaces/product/product";
-import { cn } from "@/lib/utils";
-import { createImageUrl } from "@/utils/functions/createImageUrl";
+import { Product } from "../../../interfaces/product/product";
+import { cn } from "../../../lib/utils";
+import { createImageUrl } from "../../../utils/functions/createImageUrl";
 import Image from "next/image";
 import React from "react";
 
@@ -30,9 +30,9 @@ const ColorSelectionRadio: React.FC<RadioGroupProps> = ({
             >
               <label
                 key={color}
-                className={`relative rounded-full overflow-hidden w-14 sm:w-20 h-14 sm:h-20 bg-secondary  box-border hover:ring-[#F3238A] hover:ring-offset-2 hover:ring-2 ${
+                className={`relative rounded-full overflow-hidden w-14 sm:w-20 h-14 sm:h-20 bg-secondary  box-border hover:ring-black hover:ring-offset-2 hover:ring-2 ${
                   selectedOption === color
-                    ? "ring-2 ring-[#F3238A] ring-offset-2"
+                    ? "ring-2 ring-black ring-offset-2"
                     : ""
                 }`}
               >

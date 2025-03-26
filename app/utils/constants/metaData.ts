@@ -1,8 +1,8 @@
 export const SEO_DATA = {
-    domain: "https://www.giftingsaga.com",
-    title: "GiftingSaga",
-    description: "A Popular Clothing Brand.",
-    image: "/images/logo1.svg",
+    domain: "https://example.com",
+    title: "ROLBOL",
+    description: "A Life Managing Community.",
+    image: "./logo.png",
 
     pages: {
         privacyPolicy: `Privacy Policy `,
