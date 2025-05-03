@@ -44,10 +44,48 @@ export const insights = [
 ];
 
 export const navdata = [
-    { name: "About", link: "/", dropdown: about },
+    { name: "About", link: "/about", dropdown: about },
     { name: "Membership", link: "/programs", dropdown: Membership },
-    { name: "Initiatives", link: "/events", dropdown: events },
-    { name: "Projects & CSR", link: "/coaching" , dropdown: Projects },
+    { name: "Initiatives", link: "/initiatives", dropdown: events },
+    { name: "Projects & CSR", link: "/projectandcsr" , dropdown: Projects },
     { name: "Insights", link: "/explore" , dropdown: insights },
     { name: "Merchandise", link: "/merchandise" }
 ];
+
+
+
+// data.js
+
+// Quick Links Section
+export const quickLinks = [
+    { title: "Home", link: "/" },
+    { title: "About", link: "/about" },
+    { title: "Membership", link: "/membership" },
+    { title: "Merchandise", link: "/merchandise" },
+    { title: "Contact Us", link: "/contact" },
+    { title: "Members Directory", link: "/members-directory" },
+    { title: "Members Login", link: "/members-login" },
+  ];
+  
+  // Initiatives Section
+  export const initiatives = [
+    { title: "Rolbol Talks", link: "/rolbol-talks" },
+    { title: "Rolbol Coffee Date", link: "/coffee-date" },
+    { title: "Rolbol Tribes", link: "/rolbol-tribes" },
+    { title: "Rolbol Festivals", link: "/rolbol-festivals" },
+    { title: "Rolbol Conclave", link: "/rolbol-conclave" },
+    { title: "Rolbol Podcast", link: "/podcast" },
+    { title: "Rolbol Retreat", link: "/rolbol-retreat" },
+  ];
+  
+  // Projects & CSR Section
+  export const projectsCSR = [
+    { title: "Food Donation", link: "/food-donation" },
+    { title: "Health Camp", link: "/health-camp" },
+    { title: "Blood Donation", link: "/blood-donation" },
+    { title: "Girls Safety & Hygiene", link: "/girls-safety" },
+    { title: "Cyber Awareness", link: "/cyber-awareness" },
+    { title: "Rolbol Skills", link: "/rolbol-skills" },
+    { title: "Donate Now", link: "/donate" },
+  ];
+  

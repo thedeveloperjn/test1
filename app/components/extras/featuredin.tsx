@@ -16,14 +16,14 @@ const featuredLogos = [
 
 const FeaturedIn = () => {
   return (
-    <section className=" bg-white">
+    <section className=" bg-[#f5f5f5]">
           <div className="relative max-w-5xl mx-auto h-[1px] bg-gray-700">
     <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white"></div>
   </div>
 
-      <div className=" py-28 pt-22 container mx-auto text-center">
+      <div className=" py-6 md:py-28 pt-10 md:pt-22 container mx-auto text-center">
         {/* Heading */}
-        <h2 className="text-3xl font-movatif md:text-5xl font-bold text-gray-900 mb-16">
+        <h2 className="text-[34px] font-movatif md:text-5xl font-bold text-gray-900 mb-8 md:mb-16">
           Featured In
         </h2>
 
@@ -31,15 +31,15 @@ const FeaturedIn = () => {
         <div className="relative w-full overflow-hidden space-y-4 max-w-[1350px] mx-auto">
         <div className="absolute top-0 left-0 w-10 md:w-20 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
         <div className="absolute top-0 right-0 w-10 md:w-20 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
-          <div className="flex animate-marquee mb-10">
+          <div className="flex animate-marquee mb-8 md:mb-10">
             {[...featuredLogos, ...featuredLogos].map((logo, index) => (
-              <div key={`row1-${index}`} className="flex justify-center items-center w-auto  mx-4 p-[10px] bg-white  rounded-xl shadow-md">
+              <div key={`row1-${index}`} className="flex justify-center items-center w-auto  mx-4 p-[10px] bg-white  rounded-md shadow-xs">
                 <Image
                   src={logo.src}
                   alt={logo.alt}
                   width={160}
                   height={40}
-                  className="object-contain w-auto !h-[40px] object-contain flex justify-center items-center"
+                  className="object-contain w-auto h-[28px] md:!h-[40px] object-contain flex justify-center items-center"
                 />
               </div>
             ))}
@@ -52,13 +52,13 @@ const FeaturedIn = () => {
   {/* Scrolling Row */}
   <div className="flex animate-marquee-reverse pb-8">
     {[...featuredLogos, ...featuredLogos].map((logo, index) => (
-      <div key={`row2-${index}`} className="flex justify-center items-center w-auto mx-4 p-[10px] bg-white  rounded-xl shadow-md">
+      <div key={`row2-${index}`} className="flex justify-center items-center w-auto  mx-4 p-[10px] bg-white  rounded-md shadow-xs">
         <Image
           src={logo.src}
           alt={logo.alt}
           width={160}
           height={80}
-          className="object-contain w-auto !h-[40px] object-contain flex justify-center items-center"
+          className="object-contain w-auto h-[28px] md:!h-[40px] object-contain flex justify-center items-center"
         />
       </div>
     ))}

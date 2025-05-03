@@ -10,7 +10,7 @@ import { PlayerProvider } from "./context/PlayerContext"; // Import PlayerProvid
 import StickyPlayer from "./components/StickyPlayer"; // Import StickyPlayer
 import '@fontsource/noto-sans/400.css'; // Regular
 import '@fontsource/noto-sans/700.css'; // Bold
-
+import NavBar from "./components/Navbar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -65,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Suspense fallback={<div className="h-12" />}>
             <ScrollToTop />
           </Suspense>
+          
           <ClientWrapper>
             {children}
             {/* Render the sticky player globally */}

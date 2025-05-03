@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
 import VideoModal from "./videomodal"; // Your existing modal component
-
+import { Play } from "lucide-react";
 const testimonials = [
   {
     video: "https://cdnsnty.tonyrobbins.com/2024-04-30T02-39-31.324Z-BM_Testimonial_LilianaTeaser.jpg.mp4",
@@ -81,8 +81,8 @@ const TestimonialSlide = ({ testimonial, onWatchClick }) => {
   }, [testimonial.video]);
 
   return (
-    <figure className="w-[350px]" ref={containerRef}>
-      <div className="relative flex items-center justify-center overflow-hidden w-full h-[530px] rounded-2xl">
+    <figure className="w-[310px] md:w-[350px]" ref={containerRef}>
+      <div className="relative flex items-center justify-center overflow-hidden w-full h-[490px] md:h-[530px] rounded-2xl">
         {isYouTubeLink(testimonial.video) ? (
           <iframe
             width="100%"
@@ -104,15 +104,15 @@ const TestimonialSlide = ({ testimonial, onWatchClick }) => {
           />
         )}
         <button 
-          className="absolute left-5 top-5 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full"
+          className="flex absolute left-3 top-3 md:left-5 md:top-5 bg-white/10 hover:bg-white/20 backdrop-blur-[20px] text-white px-6 py-[9px] md:py-3 rounded-full"
           onClick={() => onWatchClick(testimonial.video)}
         >
-          ▶ Watch
+          <Play size={20} className="bg-transparent !fill-none mr-1" /> Watch
         </button>
       </div>
       <blockquote className="space-y-2 my-2">
-        <p className="text-[22px] font-[500] font-movatif">"{testimonial.quote}"</p>
-        <footer className="text-[16px] opacity-60">
+        <p className="text-[20px] leading-[24px] md:leading:[26px] md:text-[22px] font-[500] font-movatif">"{testimonial.quote}"</p>
+        <footer className="text-[14px] md:text-[16px] opacity-60">
           {testimonial.name}, {testimonial.title}
         </footer>
       </blockquote>
@@ -141,13 +141,13 @@ export default function TestimonialCarousel() {
 
   return (
     <>
-      <section className="pb-10 md:pb-20 bg-white pt-10 md:pt-20 relative">
-        <div className="wrapper mx-3 md:mx-12 mb-4 md:mb-10 flex justify-between">
-          <h2 className="text-[40px] md:text-[62px] font-[100] -tracking-[0.01em] font-movatif leading-[50px]">
+      <section className="pb-10 md:pb-20 bg-[#f5f5f5] pt-10 md:pt-20 relative">
+        <div className="wrapper mx-3 md:mx-12 mb-10 flex md:flex-row flex-col justify-between">
+          <h2 className="text-[34px] md:text-[62px] font-[100] -tracking-[0.01em] font-movatif leading-[50px]">
             See what Members <br /> are saying
           </h2>
-          <div className="z-10 hidden gap-4 p-2 justify-end items-end md:flex">
-            <button className="test-prev w-14 h-14 border border-black/10 bg-black/10 hover:bg-black/20 text-black rounded-full flex items-center justify-center">
+          <div className="z-10  gap-4 p-2 -mt-[40px] md:mt-0 justify-end items-end flex">
+            <button className="test-prev h-10 w-10 md:w-14 md:h-14  bg-black/10 hover:bg-black/25 text-black rounded-full flex items-center justify-center">
               <svg className="h-7 w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="black" style={{ transform: "rotate(90deg)" }}>
                 <path
                   fillRule="evenodd"
@@ -156,7 +156,7 @@ export default function TestimonialCarousel() {
                 />
               </svg>
             </button>
-            <button className="test-next w-14 h-14 border border-black/10 bg-black/10 hover:bg-black/20 text-black rounded-full flex items-center justify-center">
+            <button className="test-next h-10 w-10 md:w-14 md:h-14  bg-black/10 hover:bg-black/15 text-black rounded-full flex items-center justify-center">
               <svg className="h-7 w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="black" style={{ transform: "rotate(270deg)" }}>
                 <path
                   fillRule="evenodd"
@@ -182,18 +182,17 @@ export default function TestimonialCarousel() {
               disabledClass: "swiper-button-disabled"
             }}
             loop={true}
-            loopAdditionalSlides={1}
             spaceBetween={45}
             breakpoints={{
-              320: { slidesPerView: 1.2 },
+              320: { slidesPerView: 1.21 ,spaceBetween:0 },
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
-              1280: { slidesPerView: 4, spaceBetween: 0 },
+              1280: { slidesPerView: 4, spaceBetween: 30 },
             }}
             centeredSlides={false}
           >
             {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index} className="!ml-2 !mr-2 md:!ml-4 md:!mr-4 !w-[350px]">
+              <SwiperSlide key={index} className="!ml-2 !mr-2 md:!ml-2 md:!mr-3 !w-[310px] md:!w-[350px]">
                 <TestimonialSlide 
                   testimonial={testimonial} 
                   onWatchClick={handleWatchClick}

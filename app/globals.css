@@ -19,8 +19,8 @@
 }
 
 .test-wrapper .swiper-wrapper{
-  padding-left: 60px;
-  gap: 15px;
+  padding-left: 30px;
+  gap: 5px;
 }
 
 @media (max-width:768px) {
@@ -88,6 +88,7 @@ body {
 }
 
 
+
    .initiatives .swiper-wrapper {
     gap: 20px;
    }
@@ -96,10 +97,10 @@ body {
 .init-card::after{
   content: "";
     position: absolute;
-    top: 15px;
-    bottom: 15px;
-    right: 15px;
-    left: 15px;
+    top: 10px;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.542);
     pointer-events: none;
@@ -119,7 +120,7 @@ body {
  
 @media (min-width:768px) {
   .testimonial-wrapper .swiper-wrapper{
-    padding-left: 30px;
+    padding-left: 60px;
   }
 }
 
@@ -203,6 +204,10 @@ body {
     pointer-events: none; /* Prevents interactions, remove if needed */
 }
 
+.homegallery .swiper-wrapper{
+  transition-timing-function:linear !important ;
+}
+
 .ytp-chrome-top, 
 .ytp-chrome-bottom, 
 .ytp-watch-later-button, 
@@ -215,11 +220,21 @@ body {
 
 
   @layer utilities {
+    .accordian-grad {
+      @apply relative border border-[2px] backdrop-blur-[50px] border-white/30 rounded-[25px] bg-[#00000000]
+          before:absolute before:inset-0 before:rounded-[23px] before:bg-[#7656991c]
+          after:absolute after:top-0 after:right-0 after:rounded-[23px] after:bg-gradient-to-tr
+          after:from-transparent after:via-transparent after:w-[20%] after:overflow-hidden
+          after:h-[20%] after:to-[#794cec3d] px-10 py-2
+          hover:after:w-[60%] hover:after:h-[60%]
+          after:transition-all after:duration-300;
+  }
+  
     .gradient-text {
       @apply bg-gradient-to-r from-[#6D78EB] via-[#53D5E8] via-[#6A81EB] to-[#794CEC] bg-clip-text text-transparent;
     }
     .button-blur{
-      @apply px-6 py-2 my-3 mb-5 rounded-full flex justify-center h-[50px] items-center  backdrop-blur-[20px] gap-2 border border-white/30 bg-white/5   w-auto hover:bg-white/20 text-white transition
+      @apply px-6 py-2 my-3 mb-5 rounded-full flex justify-center h-[50px] items-center  backdrop-blur-[50px] gap-2 border border-white/30 bg-white/10   w-auto hover:bg-white/20 text-white transition
     }
     
   }
@@ -244,12 +259,68 @@ body {
   .animate-marquee {
     display: flex;
     width: max-content;
-    animation: marquee 20s linear infinite;
+    animation: marquee 40s linear infinite;
   }
   
   .animate-marquee-reverse {
     display: flex;
     width: max-content;
-    animation: marquee-reverse 20s linear infinite;
+    animation: marquee-reverse 40s linear infinite;
   }
   
+  @keyframes circularMove {
+    0% { background-position: 0% 50%; }   /* Start from the middle left */
+    25% { background-position: 75% 100%; } /* Moves to bottom right */
+    50% { background-position: 100% 50%; } /* Moves to right center */
+    75% { background-position: 25% 0%; }   /* Moves to top left */
+    100% { background-position: 0% 50%; }  /* Completes the loop */
+}
+
+.btn-gradient-2 {
+    background: linear-gradient(black, rgb(0, 0, 0)) padding-box,
+                linear-gradient(to right, rgb(31, 31, 31), rgb(31, 31, 31), #794cec74, #a880ff2c, #794cec6d) border-box;
+    margin-bottom: 25px;
+    border: 2px solid transparent;
+    background-size: 200% 200%; /* Ensures enough space for movement */
+}
+
+.btn-gradient-3 {
+  background: linear-gradient(rgb(33, 32, 32), rgb(33, 32, 32)) padding-box,
+              linear-gradient(to right, rgb(31, 31, 31),#b192ff4e, rgb(31, 31, 31), #b192ff4e, #a880ff2c, #794cec6d) border-box;
+  margin-bottom: 25px;
+  border: 2px solid transparent;
+  background-size: 200% 200%; /* Ensures enough space for movement */
+}
+
+.btn-gradient-4 {
+  background: linear-gradient(transparent, transparent) padding-box,
+  linear-gradient(270deg, rgba(109, 120, 235, 0.779) 0%, rgba(195, 0, 255, 0.796) 25%, #53D5E8 65.5%, rgb(195, 0, 255) 100%) border-box;
+  border: 3px solid rgb(27, 27, 27);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  background-size: 150% 150%;
+  
+}
+
+.btn-gradient-4:hover {
+  background-position: right center;
+  border: 3px solid transparent;
+}
+
+.btn-gradient-2:hover ,.btn-gradient-3:hover  {
+    animation: circularMove 6s infinite linear;
+}
+
+
+
+
+.btn-gradient-5 {
+  background: linear-gradient(rgb(40, 39, 39), rgb(40, 39, 39)) padding-box,
+  linear-gradient(109.43deg, rgba(168, 128, 255, 0.2) 25.1%, rgba(168, 128, 255, 0.332) 72.57%, rgba(168, 128, 255, 0.474) 100%) border-box;
+  margin-bottom: 25px;
+  border: 1px solid transparent;
+  background-size: 200% 200%; /* Ensures enough space for movement */
+}

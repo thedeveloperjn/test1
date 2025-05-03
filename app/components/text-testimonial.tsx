@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
 import VideoModal from "./videomodal";
-
+import { Play } from "lucide-react";
 const TestimonialsSection = () => {
   const [expanded, setExpanded] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -90,7 +90,7 @@ const TestimonialsSection = () => {
       {/* Content */}
       <div className="wrapper relative w-full h-[105%] text-white">
         <div className="h-[20%] text-center">
-          <h2 className="md:text-[62px] text-[35px] pt-12 pb-4 md:py-4 font-movatif text-white uppercase">What they said</h2>
+          <h2 className="md:text-[62px] text-[35px] pt-8 md:pt-12 pb-4 md:py-4 font-movatif text-white uppercase">What they said</h2>
           <p className="text-[16px] noto-sans text-white">
             Hear from the Stars: See What Celebrities Are Saying About Rolbol's Impact Through Our Community Efforts!
           </p>
@@ -98,7 +98,7 @@ const TestimonialsSection = () => {
 
         <div className="relative space-y-10 md:pr-20 flex flex-col h-[80%] md:h-[100%] justify-between md:justify-center md:items-end">
           {/* Testimonial Quote */}
-          <div className="relative my-10 pt-14 mb-20 pt-0 max-w-2xl">
+          <div className="relative my-10 pt-0 md:pt-14 mb-20 pt-0 max-w-2xl">
             <div className="w-full">
               <blockquote 
                 className="text-center !max-h-[130px] md:!max-h-[230px] w-full lg:text-left text-[24px] px-3 mb-0 leading-[28px] md:text-[48px] md:leading-[50px] font-movatif p-4 rounded-md text-white relative"
@@ -120,12 +120,13 @@ const TestimonialsSection = () => {
                   )}
                 </span>
               </blockquote>
-              <div className="flex w-full md:justify-start justify-center mt-6">
+              <div className="flex  w-full md:justify-start justify-center md:mt-6">
                 <button
-                  className="z-[50] relative mt-2 ml-4 bg-white/40 hover:bg-white/60 backdrop-blur-[20px] text-white px-6 py-3 rounded-full"
+                  className="z-[50] relative mt-2 ml-4 bg-white/10 flex hover:bg-white/60 backdrop-blur-[20px] text-white px-6 py-[9px] md:py-3 rounded-full"
                   onClick={() => handleWatchClick(activeTestimonial)}
                 >
-                  ▶ Watch
+                  <Play size={20} className="bg-transparent !fill-none mr-1" />
+                  Watch
                 </button>
               </div>
             </div>
@@ -163,8 +164,8 @@ const TestimonialsSection = () => {
                         loading="lazy"
                       />
                     </div>
-                    <p className="font-bold">{testimonial.name}</p>
-                    <p className="text-sm opacity-70">{testimonial.designation}</p>
+                    <p className="font-bold font-movatif">{testimonial.name}</p>
+                    <p className="text-sm noto-sans opacity-70">{testimonial.designation}</p>
                   </div>
                 </SwiperSlide>
               ))}
@@ -189,7 +190,7 @@ const TestimonialsSection = () => {
                 <SwiperSlide key={testimonial.id}>
                   <div
                     className={`flex flex-col items-center text-center duration-500 ${
-                      activeIndex === testimonial.id ? "opacity-100" : "opacity-50 hover:opacity-100"
+                      activeIndex === testimonial.id ? "opacity-100" : " hover:opacity-100"
                     }`}
                     onClick={() => handleProfileClick(testimonial.id)}
                   >
@@ -201,8 +202,8 @@ const TestimonialsSection = () => {
                         loading="lazy"
                       />
                     </div>
-                    <p className="font-bold">{testimonial.name}</p>
-                    <p className="text-sm opacity-70">{testimonial.designation}</p>
+                    <p className="font-semibold font-movatif">{testimonial.name}</p>
+                    <p className="text-xs noto-sans opacity-70">{testimonial.designation}</p>
                   </div>
                 </SwiperSlide>
               ))}

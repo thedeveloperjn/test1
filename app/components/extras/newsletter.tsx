@@ -19,7 +19,7 @@ const Newsletter = () => {
       {News.map((section, index) => (
         <section
           key={index}
-          className="theme--dark relative overflow-hidden h-[70vh] pt-32 md:pt-56 pb-32 md:pb-56"
+          className="theme--dark relative overflow-hidden h-[55vh] md:h-[70vh] pt-32 md:pt-56 pb-32 md:pb-56"
           style={{ zIndex: 1 }}
         >
           {/* Background Image */}
@@ -43,13 +43,13 @@ const Newsletter = () => {
         <p className="mt-3 text-sm md:text-2sm noto-sans">Stay Updated: Subscribe to Our Newsletter!</p>
 
         {/* Subscription Form */}
-        <div className="mt-4 flex flex-col md:flex-row items-center justify-center gap-2">
+        <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-2">
           <input
             type="email"
             placeholder="Your Email ID"
-            className="px-4 py-3 w-full md:w-[400px] bg-white/10  backdrop-blur-[8px] bg-opacity-30 border border-white rounded-full text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white"
+            className="px-4 py-4 w-full md:w-[400px] bg-white/10  backdrop-blur-[8px] bg-opacity-30 border border-white rounded-full text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white"
           />
-          <button className="px-6 py-3  w-full md:w-[165px] bg-white font-movatif  text-black rounded-full text-lg font-medium hover:bg-gray-200 transition">
+          <button className="px-6 py-4  w-full md:w-[165px] bg-white font-movatif  text-black rounded-full text-lg font-medium hover:bg-gray-200 transition">
             Subscribe Now
           </button>
         </div>

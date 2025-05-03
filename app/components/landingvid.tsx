@@ -3,7 +3,7 @@ import CircularText from './extras/circular';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { MoveUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function DocumentaryHeader() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -16,7 +16,7 @@ export default function DocumentaryHeader() {
 
   return (
     <section className="bg-black relative h-screen -mt-[80px] overflow-hidden">
-      <CircularText className="absolute z-[10] bottom-[375px] md:bottom-[25%] right-[75px] md:right-[13%]" />
+      <CircularText linkclass='hidden' className="absolute z-[10] bottom-[375px] md:bottom-[25%] right-[75px] md:right-[13%]" />
       <div className="wrapper wrapper--wide relative h-full">
         <div className="relative flex h-full items-end overflow-hidden bg-black">
           
@@ -55,8 +55,8 @@ export default function DocumentaryHeader() {
                 </h1>
               </div>
               <div className='w-[100%] flex md:justify-start justify-center items-center'>
-              <Link href="#" className="button-blur ">
-                Explore Activities <MoveUpRight />
+              <Link href="#" className="button-blur font-movatif">
+                Explore Activities <ArrowUpRight />
               </Link>
               </div>
             </div>

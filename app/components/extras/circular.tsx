@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-
-export default function CircularText({ className = "" }) {
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+export default function CircularText({ className = "" , link="" , linkclass="" }) {
     const textRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [phase, setPhase] = useState("gradient");
@@ -66,9 +67,12 @@ export default function CircularText({ className = "" }) {
                                 </tspan>
                             ))}
                         </textPath>
+                        
                     </text>
                 </svg>
+             
             </div>
+            <Link href={`${link}`} className='w-[75px] flex justify-center items-center'><ArrowUpRight className={`h-[50px] w-[50px] p-2 mt-0 rounded-full  ${linkclass}`}/></Link>
         </div>
     );
 }
